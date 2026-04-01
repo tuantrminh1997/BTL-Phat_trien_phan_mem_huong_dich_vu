@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.ptit.soccerrest.domain.model.Coach;
 import org.ptit.soccerrest.domain.repository.CoachRepository;
+import org.ptit.soccerrest.util.ValidationException;
+import org.ptit.soccerrest.util.XMLValidationHelper;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,10 +26,20 @@ public class CoachService {
     }
 
     public Coach save(Coach coach) {
+        // Kiểm tra điều kiện từ validation-rules.xml trước khi lưu
+        List<String> errors = XMLValidationHelper.validateCoach(coach);
+        if (!errors.isEmpty()) {
+            throw new ValidationException(errors);
+        }
         return coachRepository.save(coach);
     }
 
     public Optional<Coach> update(Long id, Coach coach) {
+        // Kiểm tra điều kiện từ validation-rules.xml trước khi cập nhật
+        List<String> errors = XMLValidationHelper.validateCoach(coach);
+        if (!errors.isEmpty()) {
+            throw new ValidationException(errors);
+        }
         return coachRepository.findById(id).map(existing -> {
             existing.setName(coach.getName());
             existing.setAge(coach.getAge());

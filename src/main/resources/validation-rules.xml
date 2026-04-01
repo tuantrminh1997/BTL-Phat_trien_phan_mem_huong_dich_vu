@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- File cấu hình validation rules cho SoccerRest - tương tự books.xml trong RestDemo -->
+<validation-rules>
+
+    <!-- Rules cho thực thể Player (cầu thủ) -->
+    <entity name="player">
+        <field name="name">
+            <rule type="required"  message="Tên cầu thủ không được để trống"/>
+            <rule type="minLength" value="2"   message="Tên cầu thủ phải có ít nhất 2 ký tự"/>
+            <rule type="maxLength" value="100" message="Tên cầu thủ không được vượt quá 100 ký tự"/>
+        </field>
+        <field name="age">
+            <rule type="required" message="Tuổi cầu thủ không được để trống"/>
+            <rule type="min"      value="15"  message="Tuổi cầu thủ phải ít nhất 15"/>
+            <rule type="max"      value="45"  message="Tuổi cầu thủ không được vượt quá 45"/>
+        </field>
+        <field name="position">
+            <rule type="allowedValues"
+                  values="Goalkeeper,Defender,Midfielder,Winger,Striker,Forward"
+                  message="Vị trí cầu thủ không hợp lệ. Các vị trí được phép: Goalkeeper, Defender, Midfielder, Winger, Striker, Forward"/>
+        </field>
+        <field name="jerseyNumber">
+            <rule type="min" value="1"  message="Số áo phải từ 1 trở lên"/>
+            <rule type="max" value="99" message="Số áo không được vượt quá 99"/>
+        </field>
+        <field name="preferredFoot">
+            <rule type="allowedValues"
+                  values="Left,Right,Both"
+                  message="Chân thuận chỉ được là: Left, Right hoặc Both"/>
+        </field>
+        <field name="marketValue">
+            <rule type="min" value="0" message="Giá trị thị trường không được âm"/>
+        </field>
+    </entity>
+
+    <!-- Rules cho thực thể Coach (huấn luyện viên) -->
+    <entity name="coach">
+        <field name="name">
+            <rule type="required"  message="Tên HLV không được để trống"/>
+            <rule type="minLength" value="2"   message="Tên HLV phải có ít nhất 2 ký tự"/>
+            <rule type="maxLength" value="100" message="Tên HLV không được vượt quá 100 ký tự"/>
+        </field>
+        <field name="age">
+            <rule type="required" message="Tuổi HLV không được để trống"/>
+            <rule type="min"      value="25"  message="Tuổi HLV phải ít nhất 25"/>
+            <rule type="max"      value="80"  message="Tuổi HLV không được vượt quá 80"/>
+        </field>
+        <field name="licenseLevel">
+            <rule type="allowedValues"
+                  values="A,B,C,PRO,UEFA Pro,FIFA Pro,UEFA Elite"
+                  message="Bằng cấp HLV không hợp lệ. Các loại được phép: A, B, C, PRO, UEFA Pro, FIFA Pro, UEFA Elite"/>
+        </field>
+        <field name="experienceYears">
+            <rule type="min" value="0" message="Số năm kinh nghiệm không được âm"/>
+        </field>
+        <field name="preferredFormation">
+            <rule type="allowedValues"
+                  values="4-3-3,4-4-2,3-5-2,4-2-3-1,3-4-3,5-3-2,4-1-4-1,4-5-1"
+                  message="Sơ đồ chiến thuật không hợp lệ. Các sơ đồ được phép: 4-3-3, 4-4-2, 3-5-2, 4-2-3-1, 3-4-3, 5-3-2, 4-1-4-1, 4-5-1"/>
+        </field>
+    </entity>
+
+</validation-rules>
+
